@@ -4,8 +4,8 @@ pipeline {
     agent any
 
     tools {
-        maven 'mvn-3.5.4'
-        jdk 'jdk-8u181'
+        maven 'maven'
+        jdk 'jdk1.8'
     }
 
     stages {
@@ -16,10 +16,19 @@ pipeline {
 
             }
         }
+        
+        stage('pmd') {
+            steps {
+                sh "mvn pmd:pmd"
+            }
+        }
 
     }
+    
+    
     post {
         always{
+            pmd(canRunOnFailed: true, pattern: '**/target/pmd.xml')
 //            junit 'target/surefire-reports/**/*.xml'
             junit(testResults: '**/target/surefire-reports/**/*.xml')
             jacoco(
