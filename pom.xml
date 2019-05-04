@@ -163,6 +163,12 @@
              <version>2.8</version>
          </plugin>
             
+         <plugin>
+             <groupId>org.codehaus.sonar</groupId>
+             <artifactId>sonar-maven-plugin</artifactId>
+             <version>3.4.1.1168</version>
+         </plugin>
+                 
         </plugins>
     </build>
 
