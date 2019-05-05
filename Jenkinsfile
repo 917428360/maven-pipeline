@@ -27,6 +27,9 @@ pipeline {
     
     
     post {
+        failure{
+            mail body: 'failure body', from: 'cicd@alstru.com', 'build status', to: 'xiaohu.ge@alstru.com'
+        }
         always{
             pmd(canRunOnFailed: true, pattern: '**/target/pmd.xml')
 //            junit 'target/surefire-reports/**/*.xml'
