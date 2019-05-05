@@ -42,6 +42,7 @@ pipeline {
                 to: "xiaohu.ge@alstru.com"
         }
         always{
+            dingTalk accessToken: "d3b2239bc0eb89d54e51036b8efeb048cb34fed80092d1ba1c3af5255b07c086", imageUrl: "https://www.alstru.com/wp-content/themes/aletheia/images/logo2.png", jenkinsUrl: 'https://jenkins.alstru.com', message: '代码质量审查项目', notifyPeople: '葛小虎'
             pmd(canRunOnFailed: true, pattern: '**/target/pmd.xml')
 //            junit 'target/surefire-reports/**/*.xml'
             junit(testResults: '**/target/surefire-reports/**/*.xml')
