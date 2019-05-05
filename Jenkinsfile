@@ -21,7 +21,7 @@ pipeline {
 		steps{
 			nexusPublisher(
 				nexusInstanceId: 'nexus3',
-				nexusRepositoryId: 'maven-snapshots',
+				nexusRepositoryId: 'resonance-snapshots',
 				packages: [
 				[
 					$class: 'MavenPackage',
