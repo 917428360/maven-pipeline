@@ -28,7 +28,7 @@ pipeline {
     
     post {
         failure{
-            mail body: 'failure body', from: 'cicd@alstru.com', 'build status', to: 'xiaohu.ge@alstru.com'
+            mail body: 'failure body', from: 'cicd@alstru.com', subject: 'build status', to: 'xiaohu.ge@alstru.com'
         }
         always{
             pmd(canRunOnFailed: true, pattern: '**/target/pmd.xml')
