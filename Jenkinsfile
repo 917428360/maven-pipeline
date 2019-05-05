@@ -29,6 +29,17 @@ pipeline {
     post {
         failure{
             mail body: 'failure body', from: 'cicd@alstru.com', subject: 'build status', to: 'xiaohu.ge@alstru.com'
+            emailext body:
+                """<p>EXECUTE: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER})\'
+                </b></p><p>View console output at "<a href="${env.BUILD_URL}">
+                ${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p>
+                <p><i>(Build log is attached.)</i></p>""",
+                compressLog: true,
+                attachLog: true,
+                recipientProvides: [culprits(), developers(), requestor(), brokenBuildSuspects()],
+                relpyto: 'do-not-relply@alstru.com',
+                subject: "Status: ${currentBuild.result?:'SUCCESS'} - Job \'${env.JOB_NAME}:${env.BUILD_NUMBER}\'",
+                to: "xiaohu.ge@alstru.com"
         }
         always{
             pmd(canRunOnFailed: true, pattern: '**/target/pmd.xml')
