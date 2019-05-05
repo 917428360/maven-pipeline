@@ -23,6 +23,27 @@ pipeline {
             }
         }
 
+         stage('http request') {
+            steps {
+                script {
+                    def response = httpRequest(url:'http://www.baidu.com/',acceptType:"APPLICATION_JSON",
+                                               contentType:"APPLICATION_JSON",
+                                               httpMode: "POST",
+                                               authentication: "http_request",
+                                               customHeaders:[
+                                                    [name: "headername", value:"headervalue"],
+                                                    [name: "token", value:"secret", maskValue: true]
+                                               ],
+                                               requestBody:"{'buildNumer':'${env.BUILD_NUMBER}'}",
+                                               timeout: 5,
+                                               validResponseCodes: "200:302")
+                    echo "${response.status}"
+                    echo "${response.content}"
+                }
+            }
+        }
+        
+        
     }
     
     
