@@ -36,7 +36,7 @@ pipeline {
                 <p><i>(Build log is attached.)</i></p>""",
                 compressLog: true,
                 attachLog: true,
-                recipientProvides: [culprits(), developers(), requestor(), brokenBuildSuspects()],
+                recipientProviders: [culprits(), developers(), requestor(), brokenBuildSuspects()],
                 relpyTo: 'do-not-relply@alstru.com',
                 subject: "Status: ${currentBuild.result?:'SUCCESS'} - Job \'${env.JOB_NAME}:${env.BUILD_NUMBER}\'",
                 to: "xiaohu.ge@alstru.com"
