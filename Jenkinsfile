@@ -17,30 +17,7 @@ pipeline {
             }
         }
       
-       stage("Push Nexus"){
-		steps{
-			nexusPublisher(
-				nexusInstanceId: 'nexus3',
-				nexusRepositoryId: 'resonance-snapshots',
-				packages: [
-				[
-					$class: 'MavenPackage',
-					mavenAssetList: [
-						[classifier: '',
-							extension: '',
-							filePath: './target/jenkinsbook-maven-1.0-SNAPSHOT.jar'
-						]
-					],//end of mavenAssetList
-					mavenCoordinate: [
-					artifactId: 'jenkinsbook-maven',
-					groupId: 'codes.showme',
-					packaging: 'jar', version: '1.0'
-					]
-				]// end of package
-		
-			])
-		}
-	}
+
         
         
         stage('pmd') {
