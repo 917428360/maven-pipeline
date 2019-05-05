@@ -20,7 +20,7 @@ pipeline {
        stage("Push Nexus"){
 		steps{
 			nexusPublisher(
-				nexusInstanceId: 'nexus-maven-credentials',
+				nexusInstanceId: 'nexus3',
 				nexusRepositoryId: 'maven-release',
 				packages: [
 				[
