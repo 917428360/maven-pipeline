@@ -4,7 +4,8 @@ pipeline {
     agent any
     
     environment {
-		registry = "repo.alstru.com:8595"
+		registry = "http://repo.alstru.com:8595"
+	    	registry_loc = "repo.alstru.com:8595"
 		registryCredential = "nexus3"
 	}
     
@@ -28,8 +29,8 @@ pipeline {
 					credentialsId: "${registryCredential}",
 					url: "${registry}" ]) {
 					
-					sh "docker build . -t ${registry}/hello:v1"
-					sh "docker push ${registry}/hello:v1"
+					sh "docker build . -t ${registry_loc}/hello:v1"
+					sh "docker push ${registry_loc}/hello:v1"
 					}
 			}
 		
