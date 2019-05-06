@@ -2,7 +2,12 @@
 
 pipeline {
     agent any
-
+    
+    environment {
+		registry = "https://nexus.alstru.com/repository/dockerrepo/"
+		registryCredential = "nexus3"
+	}
+    
     tools {
         maven 'maven'
         jdk 'jdk1.8'
@@ -17,7 +22,18 @@ pipeline {
             }
         }
       
-
+        stage('Build Docker Image'){
+			steps{
+				withDockerRegistry([
+					credentialsId: "${registryCredential}",
+					url: "${registry}" ]) {
+					
+					sh "docker build . -t ${registry}/hello:v1"
+					sh "docker push ${registry}/hello:v1"
+					}
+			}
+		
+		}
         
         
         stage('pmd') {
