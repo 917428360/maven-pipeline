@@ -4,7 +4,7 @@ pipeline {
     agent any
     
     environment {
-		registry = "https://nexus.alstru.com/repository/dockerrepo/"
+		registry = "http://repo.alstru.com:8595"
 		registryCredential = "nexus3"
 	}
     
