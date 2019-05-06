@@ -4,7 +4,7 @@ pipeline {
     agent any
     
     environment {
-		registry = "http://repo.alstru.com:8595"
+		registry = "repo.alstru.com:8595"
 		registryCredential = "nexus3"
 	}
     
