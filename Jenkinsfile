@@ -7,6 +7,7 @@ pipeline {
 		registry = "http://repo.alstru.com:8595"
 	    	registry_loc = "repo.alstru.com:8595"
 		registryCredential = "nexus3"
+	    	nexusRawUsernamePassword = credentials('nexus3')
 	}
     
     tools {
@@ -37,6 +38,14 @@ pipeline {
 		}
         
         
+	stage('Build & Push Raw'){
+			steps{
+				sh "curl --user '${nexusRawUsernamePassword}' --upload-file ./README.md https://nexus.alstru.com/repository/raw-example/${BUILD_NUMBER}/README.md"
+			}
+		
+		}    
+	    
+	
         stage('pmd') {
             steps {
                 sh "mvn pmd:pmd"
